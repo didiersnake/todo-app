@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = [
   {
     id: 1,
-    active: true,
+    active: false,
     text: "learn react",
   },
   {
