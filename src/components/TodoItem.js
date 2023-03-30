@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./todoItem.css"
 
-const TodoItem = ({ status_, text, onClick}) => {
+const TodoItem = ({ id, status_, text, onClick, deleteI}) => {
   const [status, setStatus] = useState(status_);
 
     //on click change item active status 
@@ -19,7 +19,7 @@ const TodoItem = ({ status_, text, onClick}) => {
         
       />
       <p>{text}</p>
-      <div className="gg-close-r"></div>
+      <div className="gg-close-r" onClick={() => deleteI(id)}></div>
     </div>
   );
 };

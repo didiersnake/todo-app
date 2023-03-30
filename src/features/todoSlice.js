@@ -23,26 +23,33 @@ const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
+    //   add item to list
     addItem: {
       reducer(state, action) {
-        // normally not the corrext way but here immer js manages it
         // it works only in creatSlice
         state.push(action.payload);
       },
       //handle the data structure with prepare callback
       prepare(text) {
-          return {
-            payload: {
-              id: nanoid(),
-              active: true,
-              text,
-            },
-          };
+        return {
+          payload: {
+            id: nanoid(),
+            active: true,
+            text,
+          },
+        };
+      },
+    },
+    // delete item from list
+    deleteItem: {
+      reducer(state, action) {
+        const { id } = action.payload;
+        state = state.filter((item) => item.id !== id);
       },
     },
   },
 });
 
-export const { addItem } = todoSlice.actions;
+export const { addItem, deleteItem } = todoSlice.actions;
 export const selectAllTodo = (state) => state.todo;
-export default todoSlice.reducer
+export default todoSlice.reducer;

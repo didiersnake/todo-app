@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addItem, selectAllTodo } from "./todoSlice";
+import { addItem, selectAllTodo, deleteItem } from "./todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 
@@ -57,13 +57,20 @@ export const TodoList = () => {
     return setState(status);
   };
 
+    //Add todo item
     const addTodoItem = (e) => {
         if (e.key === "Enter") {       
             // Handle the stucture in slice using prepare callback makes it more abstract
             dispatch(addItem(input));
+            setActiveItems((prevState)=> prevState + 1)
             setInput("")
         }
   };
+
+    //delete item
+    const deleteTodoItem = (id) => {
+        dispatch(deleteItem({id:id}))
+    }
 
   const clearCompleted = () => {};
 
@@ -73,9 +80,11 @@ export const TodoList = () => {
       return (
         <TodoItem
           key={item.id}
+          id={item.id}
           text={item.text}
           status_={item.active}
           onClick={handleClick}
+          deleteI={deleteTodoItem}
         />
       );
     });
@@ -85,9 +94,11 @@ export const TodoList = () => {
         Boolean(item.active) && (
           <TodoItem
             key={item.id}
+            id={item.id}
             text={item.text}
             status_={item.active}
             onClick={handleClick}
+            deleteI={deleteTodoItem}
           />
         )
       );
@@ -98,9 +109,11 @@ export const TodoList = () => {
         Boolean(!item.active) && (
           <TodoItem
             key={item.id}
+            id={item.id}
             text={item.text}
             status_={item.active}
             onClick={handleClick}
+            deleteI={deleteTodoItem}
           />
         )
       );
