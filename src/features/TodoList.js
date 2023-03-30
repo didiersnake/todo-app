@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { selectAllTodo } from "./todoSlice";
-import { useSelector } from "react-redux";
+import { addItem, selectAllTodo } from "./todoSlice";
+import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 
 export const TodoList = () => {
-    const [state, setState] = useState("all");
-    const [input, setInput] = useState("");
+  const [state, setState] = useState("all");
+  const [input, setInput] = useState("");
   const todoItems = useSelector(selectAllTodo);
+  const dispatch = useDispatch();
 
   const handleClick = (status_) => {
     Boolean(status_)
@@ -14,9 +15,9 @@ export const TodoList = () => {
       : setActiveItems((prevState) => prevState - 1);
   };
 
-    const handleChange = (e) => {
-        setInput(e.target.value)
-    }
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
 
   // fetch uncompleted items number
   const itemsLeft = todoItems.filter((item) => {
@@ -56,8 +57,15 @@ export const TodoList = () => {
     return setState(status);
   };
 
-    const clearCompleted = () => {
+    const addTodoItem = (e) => {
+        if (e.key === "Enter") {       
+            // Handle the stucture in slice using prepare callback makes it more abstract
+            dispatch(addItem(input));
+            setInput("")
+        }
   };
+
+  const clearCompleted = () => {};
 
   let content;
   if (state === "all") {
@@ -102,7 +110,14 @@ export const TodoList = () => {
   return (
     <div>
       <div>
-        <input placeholder="Typing..." type="text" value={input} onChange={handleChange} className=""></input>
+        <input
+          placeholder="Typing..."
+          type="text"
+          value={input}
+          onChange={handleChange}
+          onKeyDown={addTodoItem}
+          className=""
+        ></input>
       </div>
       <div>{content}</div>
       <div>
