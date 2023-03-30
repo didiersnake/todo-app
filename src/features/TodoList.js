@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 
 export const TodoList = () => {
-  const [state, setState] = useState("all");
+    const [state, setState] = useState("all");
+    const [input, setInput] = useState("");
   const todoItems = useSelector(selectAllTodo);
 
   const handleClick = (status_) => {
@@ -13,14 +14,17 @@ export const TodoList = () => {
       : setActiveItems((prevState) => prevState - 1);
   };
 
+    const handleChange = (e) => {
+        setInput(e.target.value)
+    }
+
   // fetch uncompleted items number
   const itemsLeft = todoItems.filter((item) => {
     return Boolean(item.active);
   });
   const [activeItems, setActiveItems] = useState(itemsLeft.length);
 
- /* 
-
+  /* 
   // fetch completed topics
   const completedItems = todoItems.map((item) => {
     return (
@@ -46,10 +50,13 @@ export const TodoList = () => {
       />
     );
   });
-
  */
+
   const displayStatus = (status) => {
     return setState(status);
+  };
+
+    const clearCompleted = () => {
   };
 
   let content;
@@ -94,7 +101,10 @@ export const TodoList = () => {
 
   return (
     <div>
-      {content}
+      <div>
+        <input placeholder="Typing..." type="text" value={input} onChange={handleChange} className=""></input>
+      </div>
+      <div>{content}</div>
       <div>
         <div>{`${activeItems} items left`}</div>
         <div>
@@ -103,7 +113,7 @@ export const TodoList = () => {
           <button onClick={() => displayStatus("completed")}>Completed</button>
         </div>
         <div>
-            <button>Clear completed</button>
+          <button onClick={clearCompleted}>Clear completed</button>
         </div>
       </div>
     </div>
