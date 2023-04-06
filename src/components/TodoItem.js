@@ -10,7 +10,6 @@ const TodoItem = ({ id, status_, text, onClick, deleteI}) => {
     //on click change item active status 
     // fix number of active items
   const toggle = () => {
-      dispatch(setActiveItem({id:id}))
       setStatus(prevState => !prevState);
       onClick(!status)
     };

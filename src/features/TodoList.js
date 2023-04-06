@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addItem, selectAllTodo, deleteItem } from "./todoSlice";
+import { addItem, selectAllTodo, deleteItem, deleteCompleted } from "./todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 
@@ -18,6 +18,7 @@ export const TodoList = () => {
     Boolean(status_)
       ? setActiveItems((prevState) => prevState + 1)
       : setActiveItems((prevState) => prevState - 1);
+    
   };
 
   const handleChange = (e) => {
@@ -71,7 +72,9 @@ export const TodoList = () => {
     dispatch(deleteItem({ id: id }));
   };
 
-  const clearCompleted = () => {};
+  const clearCompleted = () => {
+    dispatch(deleteCompleted())
+  };
 
   let content;
   if (state === "all") {

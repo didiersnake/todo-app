@@ -40,22 +40,23 @@ const todoSlice = createSlice({
         };
       },
     },
-    setActiveItem: {
-      reducer(state, action) {
+    setActiveItem:(state, action)=>{
         const { id } = action.payload;
-        state = state.map((item) => {
-          return item.id === id && !item.active;
+        return state = state.map((item) => {
+        return item.id === id && !item.active;
         })
-      }
-    },
+      },
     // delete item from list
     deleteItem:(state, action)=>{
       const { id } = action.payload;
         return state = state.filter((item) => item.id !== id);
+    },
+    deleteCompleted:(state, action)=>{
+        return state = state.filter((item) => item.active);
     }
   },
 });
 
-export const { addItem, deleteItem, setActiveItem } = todoSlice.actions;
+export const { addItem, deleteItem, setActiveItem, deleteCompleted } = todoSlice.actions;
 export const selectAllTodo = (state) => state.todo;
 export default todoSlice.reducer;
