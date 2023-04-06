@@ -8,6 +8,11 @@ export const TodoList = () => {
   const [input, setInput] = useState("");
   const todoItems = useSelector(selectAllTodo);
   const dispatch = useDispatch();
+  // fetch uncompleted items number
+  const itemsLeft = todoItems.filter((item) => {
+    return Boolean(item.active);
+  });
+  const [activeItems, setActiveItems] = useState(itemsLeft.length);
 
   const handleClick = (status_) => {
     Boolean(status_)
@@ -18,12 +23,6 @@ export const TodoList = () => {
   const handleChange = (e) => {
     setInput(e.target.value);
   };
-
-  // fetch uncompleted items number
-  const itemsLeft = todoItems.filter((item) => {
-    return Boolean(item.active);
-  });
-  const [activeItems, setActiveItems] = useState(itemsLeft.length);
 
   /* 
   // fetch completed topics
@@ -57,20 +56,20 @@ export const TodoList = () => {
     return setState(status);
   };
 
-    //Add todo item
-    const addTodoItem = (e) => {
-        if (e.key === "Enter") {       
-            // Handle the stucture in slice using prepare callback makes it more abstract
-            dispatch(addItem(input));
-            setActiveItems((prevState)=> prevState + 1)
-            setInput("")
-        }
+  //Add todo item
+  const addTodoItem = (e) => {
+    if (e.key === "Enter") {
+      // Handle the stucture in slice using prepare callback makes it more abstract
+      dispatch(addItem(input));
+      setActiveItems((prevState) => prevState + 1);
+      setInput("");
+    }
   };
 
-    //delete item
-    const deleteTodoItem = (id) => {
-        dispatch(deleteItem({id:id}))
-    }
+  //delete item
+  const deleteTodoItem = (id) => {
+    dispatch(deleteItem({ id: id }));
+  };
 
   const clearCompleted = () => {};
 
@@ -130,7 +129,7 @@ export const TodoList = () => {
           onChange={handleChange}
           onKeyDown={addTodoItem}
           className=""
-        ></input>
+        />
       </div>
       <div>{content}</div>
       <div>
