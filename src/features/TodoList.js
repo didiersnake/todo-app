@@ -56,6 +56,7 @@ export const TodoList = () => {
   });
  */
 
+  const orderedTodoList = todoItems.slice().sort((a, b) => b.date.localeCompare(a.date))
   //todoList state items to display (active, completed)
   const displayStatus = (status) => {
     return setState(status);
@@ -82,7 +83,7 @@ export const TodoList = () => {
 
   let content;
   if (state === "all") {
-    content = todoItems.map((item) => {
+    content = orderedTodoList.map((item) => {
       return (
         <TodoItem
           key={item.id}
@@ -95,7 +96,7 @@ export const TodoList = () => {
       );
     });
   } else if (state === "active") {
-    content = todoItems.map((item) => {
+    content = orderedTodoList.map((item) => {
       return (
         Boolean(item.active) && (
           <TodoItem
@@ -110,7 +111,7 @@ export const TodoList = () => {
       );
     });
   } else if (state === "completed") {
-    content = todoItems.map((item) => {
+    content = orderedTodoList.map((item) => {
       return (
         Boolean(!item.active) && (
           <TodoItem
