@@ -41,11 +41,20 @@ const todoSlice = createSlice({
       },
     },
     setActiveItem:(state, action)=>{
-        const { id } = action.payload;
-        return state = state.map((item) => {
-        return item.id === id && !item.active;
-        })
-      },
+      const { id } = action.payload;
+      const existingTodo = state.find((item) => item.id === id);
+      let newItem
+      if (existingTodo) {
+        newItem = {
+          id: existingTodo.id,
+          active: !existingTodo.active,
+          text: existingTodo.text,
+        }
+      }
+      const todos = state.filter((item) => item.id !== id);
+      return [...todos, newItem] 
+    },
+    
     // delete item from list
     deleteItem:(state, action)=>{
       const { id } = action.payload;

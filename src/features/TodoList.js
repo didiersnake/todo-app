@@ -1,28 +1,31 @@
 import React, { useState } from "react";
-import { addItem, selectAllTodo, deleteItem, deleteCompleted } from "./todoSlice";
+import { addItem, selectAllTodo, deleteItem, deleteCompleted, setActiveItem } from "./todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 
 export const TodoList = () => {
   const [state, setState] = useState("all");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(() => "");
   const todoItems = useSelector(selectAllTodo);
   const dispatch = useDispatch();
+
   // fetch uncompleted items number
   const itemsLeft = todoItems.filter((item) => {
     return Boolean(item.active);
   });
   const [activeItems, setActiveItems] = useState(itemsLeft.length);
 
-  const handleClick = (status_) => {
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  // Set active and inactive todo items
+  const handleClick = (status_, id, text) => {
     Boolean(status_)
       ? setActiveItems((prevState) => prevState + 1)
       : setActiveItems((prevState) => prevState - 1);
     
-  };
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
+      dispatch(setActiveItem({ id: id }));
   };
 
   /* 
@@ -53,6 +56,7 @@ export const TodoList = () => {
   });
  */
 
+  //todoList state items to display (active, completed)
   const displayStatus = (status) => {
     return setState(status);
   };
