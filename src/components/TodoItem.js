@@ -11,14 +11,19 @@ const TodoItem = ({ id, status_, text, onClick, deleteI}) => {
       onClick(!status, id, status_, text)
     };
   return (
-    <div className="label">
-      <div
-        className={Boolean(status) ? "active" : "active completed"}
-        onClick={toggle}
-        
-      />
-      <p>{text}</p>
-      <div className="gg-close-r" onClick={() => deleteI(id)}></div>
+    <div className="flex justify-between p-2 border-b-slate-50 border-b">
+      <div className="flex justify-center align-middle gap-6">
+        <div
+          className={
+            Boolean(status)
+              ? "w-4 h-4 rounded-full bg-transparent border-white border-2"
+              : "active completed"
+          }
+          onClick={toggle}
+        />
+        <p>{text}</p>
+      </div>
+      <div className="gg-close-r " onClick={() => deleteI(id, status_)}></div>
     </div>
   );
 };

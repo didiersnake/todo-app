@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { addItem, selectAllTodo, deleteItem, deleteCompleted, setActiveItem } from "./todoSlice";
+import {
+  addItem,
+  selectAllTodo,
+  deleteItem,
+  deleteCompleted,
+  setActiveItem,
+} from "./todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "../components/TodoItem";
 
@@ -24,8 +30,8 @@ export const TodoList = () => {
     Boolean(status_)
       ? setActiveItems((prevState) => prevState + 1)
       : setActiveItems((prevState) => prevState - 1);
-    
-      dispatch(setActiveItem({ id: id }));
+
+    dispatch(setActiveItem({ id: id }));
   };
 
   /* 
@@ -56,7 +62,9 @@ export const TodoList = () => {
   });
  */
 
-  const orderedTodoList = todoItems.slice().sort((a, b) => b.date.localeCompare(a.date))
+  const orderedTodoList = todoItems
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
   //todoList state items to display (active, completed)
   const displayStatus = (status) => {
     return setState(status);
@@ -73,12 +81,13 @@ export const TodoList = () => {
   };
 
   //delete item
-  const deleteTodoItem = (id) => {
-    dispatch(deleteItem({ id: id }));
+  const deleteTodoItem = (id, status_) => {
+    Boolean(status_) && setActiveItems((prevState) => prevState - 1);
+      dispatch(deleteItem({ id: id }));
   };
 
   const clearCompleted = () => {
-    dispatch(deleteCompleted())
+    dispatch(deleteCompleted());
   };
 
   let content;
@@ -128,27 +137,31 @@ export const TodoList = () => {
   }
 
   return (
-    <div>
+    <div className="text-white flex justify-center align-middle flex-col gap-10">
       <div>
         <input
-          placeholder="Typing..."
+          placeholder="currently typing.."
           type="text"
           value={input}
           onChange={handleChange}
           onKeyDown={addTodoItem}
-          className=""
+          className="text-black"
         />
       </div>
-      <div>{content}</div>
       <div>
-        <div>{`${activeItems} items left`}</div>
-        <div>
-          <button onClick={() => displayStatus("all")}>All</button>
-          <button onClick={() => displayStatus("active")}>Active</button>
-          <button onClick={() => displayStatus("completed")}>Completed</button>
-        </div>
-        <div>
-          <button onClick={clearCompleted}>Clear completed</button>
+        <div className="pb-3">{content}</div>
+        <div className="flex justify-between min-w-full py-2 px-10">
+          <div>{`${activeItems} items left`}</div>
+          <div className="flex gap-5">
+            <button onClick={() => displayStatus("all")}>All</button>
+            <button onClick={() => displayStatus("active")}>Active</button>
+            <button onClick={() => displayStatus("completed")}>
+              Completed
+            </button>
+          </div>
+          <div>
+            <button onClick={clearCompleted}>Clear completed</button>
+          </div>
         </div>
       </div>
     </div>
