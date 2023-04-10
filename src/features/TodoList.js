@@ -137,7 +137,7 @@ export const TodoList = () => {
   }
 
   return (
-    <div className="text-white flex justify-center align-middle flex-col gap-10 dark:text-[#000000]">
+    <div className="text-white flex justify-center align-middle flex-col gap-5 md:gap-10 dark:text-[#000000]">
       <div className="w-full flex bg-[#25273C] rounded gap-1  dark:bg-slate-100">
         <div className="w-4 h-4 ml-5 mr-2 my-5 rounded-full bg-transparent border-gray-600 border dark:border-gray-300"></div>
 
@@ -155,7 +155,7 @@ export const TodoList = () => {
         <div className="">{content}</div>
         <div className="p-3 flex justify-between min-w-full text-sm">
           <div className="opacity-30">{`${activeItems} items left`}</div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 invisible md:visible lg:visible">
             <button
               className={state === "all" && "text-blue-600"}
               onClick={() => displayStatus("all")}
@@ -178,6 +178,29 @@ export const TodoList = () => {
           <div>
             <button onClick={clearCompleted}>Clear completed</button>
           </div>
+        </div>
+      </div>
+
+      <div className="max-w-full max-h-14 flex justify-center items-center p-3 bg-[#25273C] rounded shadow-2xl visible md:invisible lg:invisible">
+        <div className="flex gap-2">
+          <button
+            className={state === "all" && "text-blue-600"}
+            onClick={() => displayStatus("all")}
+          >
+            All
+          </button>
+          <button
+            className={state === "active" && "text-blue-600"}
+            onClick={() => displayStatus("active")}
+          >
+            Active
+          </button>
+          <button
+            className={state === "completed" && "text-blue-600"}
+            onClick={() => displayStatus("completed")}
+          >
+            Completed
+          </button>
         </div>
       </div>
     </div>
