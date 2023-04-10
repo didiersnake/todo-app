@@ -137,21 +137,21 @@ export const TodoList = () => {
   }
 
   return (
-    <div className="text-white flex justify-center align-middle flex-col gap-10">
-      <div className="w-full flex bg-[#25273C] rounded gap-1">
-        <div className="">
-          <div className="w-4 h-4 ml-5 mr-2 my-5 rounded-full bg-transparent border-gray-600 border "></div>
-        </div>
+    <div className="text-white flex justify-center align-middle flex-col gap-10 dark:text-[#000000]">
+      <div className="w-full flex bg-[#25273C] rounded gap-1  dark:bg-slate-100">
+        <div className="w-4 h-4 ml-5 mr-2 my-5 rounded-full bg-transparent border-gray-600 border dark:border-gray-300"></div>
+
         <input
           placeholder="currently typing..."
           type="text"
           value={input}
           onChange={handleChange}
           onKeyDown={addTodoItem}
-          className="w-full p-3 pl-0 text-white placeholder:italic border-transparent rounded bg-[#25273C] focus:outline-none"
+          className="w-full p-3 pl-0 text-white placeholder:italic border-transparent rounded bg-[#25273C] dark:bg-slate-100 dark:text-black focus:outline-none"
         />
       </div>
-      <div className="border bg-[#25273C] border-transparent rounded-md shadow-2xl">
+
+      <div className="border bg-[#25273C] dark:bg-white border-transparent rounded-md shadow-2xl">
         <div className="">{content}</div>
         <div className="p-3 flex justify-between min-w-full text-sm">
           <div className="opacity-30">{`${activeItems} items left`}</div>

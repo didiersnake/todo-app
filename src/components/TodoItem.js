@@ -12,7 +12,7 @@ const TodoItem = ({ id, status_, text, onClick, deleteI }) => {
     onClick(!status, id, status_, text);
   };
   return (
-    <div className="group max-w-full max-h-14 flex justify-between items-center p-3 border-b border-gray-600">
+    <div className="group max-w-full max-h-14 flex justify-between items-center p-3 border-b border-gray-600 dark:border-gray-300">
       <div className="flex gap-1 items-center">
         <div className="mx-2">
           {Boolean(status) ? (
@@ -23,8 +23,10 @@ const TodoItem = ({ id, status_, text, onClick, deleteI }) => {
               onClick={toggle}
             ></div>
           ) : (
-              <div className="w-4 h-4 rounded-full bg-[#9E7BF3] flex items-center justify-center"
-              onClick={toggle}>
+            <div
+              className="w-4 h-4 rounded-full bg-[#9E7BF3] flex items-center justify-center"
+              onClick={toggle}
+            >
               <img src={Check} alt="check" />
             </div>
           )}
@@ -34,7 +36,7 @@ const TodoItem = ({ id, status_, text, onClick, deleteI }) => {
             className={
               Boolean(status)
                 ? "first-letter:capitalize cursor-pointer"
-                : "opacity-30 first-letter:capitalize cursor-pointer"
+                : "opacity-30 first-letter:capitalize line-through cursor-pointer"
             }
           >
             {text}
