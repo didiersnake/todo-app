@@ -140,7 +140,7 @@ export const TodoList = () => {
     <div className="text-white flex justify-center align-middle flex-col gap-10">
       <div className="w-full flex bg-[#25273C] rounded gap-1">
         <div className="">
-          <div className="w-3 h-3 ml-5 mr-2 my-5 rounded-full bg-transparent border-white border "></div>
+          <div className="w-4 h-4 ml-5 mr-2 my-5 rounded-full bg-transparent border-gray-600 border "></div>
         </div>
         <input
           placeholder="currently typing..."
@@ -154,7 +154,7 @@ export const TodoList = () => {
       <div className="border bg-[#25273C] border-transparent rounded-md shadow-2xl">
         <div className="">{content}</div>
         <div className="p-3 flex justify-between min-w-full text-sm">
-          <div>{`${activeItems} items left`}</div>
+          <div className="opacity-30">{`${activeItems} items left`}</div>
           <div className="flex gap-2">
             <button
               className={state === "all" && "text-blue-600"}
