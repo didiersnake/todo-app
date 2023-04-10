@@ -11,19 +11,33 @@ const TodoItem = ({ id, status_, text, onClick, deleteI}) => {
       onClick(!status, id, status_, text)
     };
   return (
-    <div className="flex justify-between p-2 border-b-slate-50 border-b">
-      <div className="flex justify-center align-middle gap-6">
-        <div
-          className={
-            Boolean(status)
-              ? "w-4 h-4 rounded-full bg-transparent border-white border-2"
-              : "active completed"
-          }
-          onClick={toggle}
-        />
-        <p>{text}</p>
+    <div className="max-w-full max-h-14 flex justify-between align-text-top p-3 border-b border-gray-600">
+      <div className="flex gap-1">
+        <div className="pt-1.5 mx-2">
+          <div
+            className={
+              Boolean(status)
+                ? "w-3 h-3 rounded-full bg-transparent border-white border cursor-pointer"
+                : "w-3 h-3 rounded-full bg-fuchsia-800 border cursor-pointer"
+            }
+            onClick={toggle}
+          ></div>
+        </div>
+        <div className="">
+          <p
+            className={
+              Boolean(status)
+                ? "first-letter:capitalize cursor-pointer"
+                : "opacity-30 first-letter:capitalize cursor-pointer"
+            }
+          >
+            {text}
+          </p>
+        </div>
       </div>
-      <div className="gg-close-r " onClick={() => deleteI(id, status_)}></div>
+      <div className="pt-1">
+        <i className="gg-close-r" onClick={() => deleteI(id, status_)} />
+      </div>
     </div>
   );
 };

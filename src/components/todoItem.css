@@ -23,7 +23,6 @@
  box-sizing: border-box;
  position: relative;
  right: 0;
- padding: 0 20px;
  display: block;
  transform: scale(var(--ggs,.9));
  width: 15px;

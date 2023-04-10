@@ -83,7 +83,7 @@ export const TodoList = () => {
   //delete item
   const deleteTodoItem = (id, status_) => {
     Boolean(status_) && setActiveItems((prevState) => prevState - 1);
-      dispatch(deleteItem({ id: id }));
+    dispatch(deleteItem({ id: id }));
   };
 
   const clearCompleted = () => {
@@ -138,24 +138,40 @@ export const TodoList = () => {
 
   return (
     <div className="text-white flex justify-center align-middle flex-col gap-10">
-      <div>
+      <div className="w-full flex bg-[#25273C] rounded gap-1">
+        <div className="">
+          <div className="w-3 h-3 ml-5 mr-2 my-5 rounded-full bg-transparent border-white border "></div>
+        </div>
         <input
-          placeholder="currently typing.."
+          placeholder="currently typing..."
           type="text"
           value={input}
           onChange={handleChange}
           onKeyDown={addTodoItem}
-          className="text-black"
+          className="w-full p-3 pl-0 text-white placeholder:italic border-transparent rounded bg-[#25273C] focus:outline-none"
         />
       </div>
-      <div>
-        <div className="pb-3">{content}</div>
-        <div className="flex justify-between min-w-full py-2 px-10">
+      <div className="border bg-[#25273C] border-transparent rounded-md shadow-2xl">
+        <div className="">{content}</div>
+        <div className="p-3 flex justify-between min-w-full text-sm">
           <div>{`${activeItems} items left`}</div>
-          <div className="flex gap-5">
-            <button onClick={() => displayStatus("all")}>All</button>
-            <button onClick={() => displayStatus("active")}>Active</button>
-            <button onClick={() => displayStatus("completed")}>
+          <div className="flex gap-2">
+            <button
+              className={state === "all" && "text-blue-600"}
+              onClick={() => displayStatus("all")}
+            >
+              All
+            </button>
+            <button
+              className={state === "active" && "text-blue-600"}
+              onClick={() => displayStatus("active")}
+            >
+              Active
+            </button>
+            <button
+              className={state === "completed" && "text-blue-600"}
+              onClick={() => displayStatus("completed")}
+            >
               Completed
             </button>
           </div>
