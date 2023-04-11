@@ -3,8 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Condensed:wght@700&display=swap');
 body{
     background: url("./images/bg-desktop-dark.jpg");
     background-repeat: no-repeat;
     background-color: #181824;
+    font-family: "poppins";
 } 
